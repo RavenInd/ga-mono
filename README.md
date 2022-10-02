@@ -4,7 +4,7 @@
 
 First of all make sure that mongodb daemon is active.
 
-Then run the following commands
+Then run the following commands one by one:
 
 ```bash
     yarn
@@ -18,4 +18,4 @@ Then run the following commands
     yarn start
 ```
 
-Now you can go to [localhost:8000](localhost:8000) and check it
+Now you can open [localhost:8000](localhost:8000)
