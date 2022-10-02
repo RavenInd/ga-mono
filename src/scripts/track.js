@@ -19,7 +19,7 @@ const buildTrackData = (event, tags) => {
     return {
         event,
         tags,
-        url: window.location.href,,
+        url: window.location.href,
         title: document.getElementsByTagName('title')[0].innerHTML,
         ts: new Date().toISOString(),
     }
