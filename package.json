@@ -7,7 +7,9 @@
     "type": "commonjs",
     "scripts": {
         "dev": "nodemon --watch src -e ts,tsx --exec ts-node src/server.ts",
-        "build": "yarn tsc",
+        "build": "yarn clean && tsc && yarn copy-files",
+        "clean": "rm -rf ./dist",
+        "copy-files": "cp ./src/pages/*.html ./dist/pages",
         "start": "node dist/server.js"
     },
     "dependencies": {

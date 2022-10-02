@@ -17,5 +17,5 @@
         "experimentalDecorators": true
     },
     "exclude": ["node_modules"],
-    "include": ["**/*.ts", "src/scripts/track.js"]
+    "include": ["**/*.ts", "src/scripts/track.js", "**/*.html"]
 }

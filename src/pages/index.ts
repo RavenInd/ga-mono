@@ -9,6 +9,7 @@ type Pages = {
 
 const pages: Pages = {}
 const readHTMLFiles: ReadFiles = (dirname, onFileContent) => {
+    console.log(dirname)
     const filenames = fs.readdirSync(dirname)
 
     filenames.forEach((filename) => {
