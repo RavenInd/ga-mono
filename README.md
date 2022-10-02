@@ -1,4 +1,4 @@
-# Custom analytics
+# Custom user activity tracking service
 
 ## How to use
 
