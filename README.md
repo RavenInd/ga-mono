@@ -18,4 +18,4 @@ Then run the following commands one by one:
     yarn start
 ```
 
-Now you can open [localhost:8000](localhost:8000)
+Now you can open [localhost:8000](localhost:8000) and perform any tests
