@@ -2,7 +2,7 @@
 
 ## How to use
 
-First of all make sure that mongodb daemon is active.
+First of all make sure that mongodb daemon is active at `localhost:27017` or go to `src/config.ts` file and change `connectionString`.
 
 Then run the following commands one by one:
 
