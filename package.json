@@ -8,9 +8,9 @@
     "scripts": {
         "dev": "nodemon --watch src -e ts,tsx --exec ts-node src/server.ts",
         "build": "yarn clean && tsc && yarn copy-files",
+        "start": "node dist/server.js",
         "clean": "rm -rf ./dist",
-        "copy-files": "cp ./src/pages/*.html ./dist/pages",
-        "start": "node dist/server.js"
+        "copy-files": "cp ./src/pages/*.html ./dist/pages"
     },
     "dependencies": {
         "@koa/cors": "^3.4.1",

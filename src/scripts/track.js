@@ -19,7 +19,7 @@ const buildTrackData = (event, tags) => {
     return {
         event,
         tags,
-        url: window.location.href,
+        url: window.location.href,,
         title: document.getElementsByTagName('title')[0].innerHTML,
         ts: new Date().toISOString(),
     }
@@ -44,10 +44,26 @@ const sendTrackDataArrayToServer = () => {
         headers: config.headers,
         method: 'POST',
         body: JSON.stringify({ events: currentBuffer }),
-    }).catch(() => {
+    }).catch((err) => {
+        console.log(err.status)
         const newCurrentBuffer = [...buffer]
         buffer = [...currentBuffer, ...newCurrentBuffer]
     })
+}
+
+const checkRulesAndSend = () => {
+    const lastSendMs = getTimeDelta(new Date(), lastTimeTrackDataSent)
+    const isValidTimeForSendDate =
+        lastTimeTrackDataSent && lastSendMs >= config.debounceTimeMs
+
+    if (buffer.length >= 3 || isValidTimeForSendDate) {
+        sendTrackDataArrayToServer()
+        return
+    }
+
+    timeout = setTimeout(() => {
+        sendTrackDataArrayToServer()
+    }, config.debounceTimeMs - lastSendMs)
 }
 
 class Tracker {
@@ -59,21 +75,13 @@ class Tracker {
 
         const trackData = buildTrackData(event, tags)
         addTrackDataToBuffer(trackData)
+        checkRulesAndSend()
+    }
+}
 
-        const lastSendMs = getTimeDelta(new Date(), lastTimeTrackDataSent)
-
-        if (buffer.length >= 3) {
-            sendTrackDataArrayToServer()
-            return
-        }
-
-        if (lastTimeTrackDataSent && lastSendMs >= config.debounceTimeMs) {
-            sendTrackDataArrayToServer()
-        } else {
-            timeout = setTimeout(() => {
-                sendTrackDataArrayToServer()
-            }, config.debounceTimeMs - lastSendMs)
-        }
+window.navigator.connection.onchange = () => {
+    if (window.navigator.onLine) {
+        checkRulesAndSend()
     }
 }
 

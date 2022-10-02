@@ -2,7 +2,6 @@ import { Context } from 'koa'
 import fs from 'fs'
 import Track from '../model/tracks'
 import { request, summary, responsesAll } from 'koa-swagger-decorator'
-
 @responsesAll({
     200: { description: 'Success' },
     400: { description: 'Bad request' },

@@ -1,10 +1,11 @@
 <script>
-    (e=>{let t={headers:{"Content-Type":"text/plain"},apiUrl:"http://localhost:8001",dTMs:1e3},
-    l=[],n=null,r=null,a=(e,l)=>l?e.getTime()-l.getTime():t.dTMs,s=(t,l)=>({event:t,tags:l,url:e.location.href,
-    title:document.getElementsByTagName("title")[0].innerHTML,ts:new Date().toISOString()}),i=e=>{l.push(e)},
-    d=()=>{l=[]},h=()=>{if(!l.length)return;let e=[...l];d(),n=new Date,fetch(`${t.apiUrl}/track`,
-    {headers:t.headers,method:"POST",body:JSON.stringify({events:e})}).catch(()=>{let t=[...l];l=[...e,...t]})};
-    class o{track(e,...d){r&&(clearTimeout(r),r=null);let o=s(e,d);i(o);let T=a(new Date,n);if(l.length>=3){h();
-    return}n&&T>=t.dTMs?h():r=setTimeout(()=>{h()},t.dTMs-T)}}e.addEventListener("beforeunload",e=>{e.preventDefault(),h()}),
-    e.tracker=new o})(window);
+ (e=>{let t={headers:{"Content-Type":"text/plain"},apiUrl:"http://localhost:8001",dTms:1e3},n=[],
+ l=null,a=null, r=(e,n)=>n?e.getTime()-n.getTime():t.dTms,i=(t,n)=>({event:t,tags:n,url:e.location.href,
+ title:document.getElementsByTagName("title")[0].innerHTML,ts:new Date().toISOString()}),s=e=>{n.push(e)},
+ o=()=>{n=[]},d=()=>{if(!n.length)return;let e=[...n];o(),l=new Date,fetch(`${t.apiUrl}/track`,
+ {headers:t.headers,method:"POST",body:JSON.stringify({events:e})}).catch(t=>{console.log(t.status);
+ let l=[...n];n=[...e,...l]})},g=()=>{let e=r(new Date,l),i=l&&e>=t.dTms;if(n.length>=3||i){d();return}
+ a=setTimeout(()=>{d()},t.dTms-e)};class h{track(e,...t){a&&(clearTimeout(a),a=null);let n=i(e,t);s(n),g()}}
+ e.navigator.connection.onchange=()=>{e.navigator.onLine&&g()},e.addEventListener("beforeunload",e=>{e.preventDefault(),d()}),
+ e.tracker=new h})(window);
 </script>
